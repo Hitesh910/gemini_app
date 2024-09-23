@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import '../../../utils/API_helper.dart';
+import '../../../utils/helper/db_helper.dart';
 import '../../../utils/helper/shared_helper.dart';
+import '../../history/model/history_model.dart';
 import '../model/gemini_model.dart';
 
 class HomeController extends GetxController
@@ -10,6 +12,7 @@ class HomeController extends GetxController
    RxList<String> geminiList = <String>[].obs;
    ValueNotifier<bool> isCheck =  ValueNotifier(false);
    RxBool isTheme = false.obs;
+   RxList<HistoryModel> historyList = <HistoryModel>[].obs;
 
  void getData(String search)
     async{
@@ -18,20 +21,8 @@ class HomeController extends GetxController
 
     geminiList.add(model!.candidates[0].content.parts[0].text);
     isCheck.value = false;
-    // model.then((value) {
-    //   if(model!=null){
-    //     geminiList.addAll(model);
-    //   }
-    // },);
-    // model!.then((value) {
-    //
-    // },);
-    // if(model1!= null)
-    //   {
-    //     model?.value = model1;
-    //     return "Data is Come";
-    //   }
-    // return "Data is noting";
+
+     DbHelper.helper.insertData(search,model!.candidates[0].content.parts[0].text);
   }
 
   void changeTheme()
@@ -39,4 +30,14 @@ class HomeController extends GetxController
   bool? theme  =await SharedHelper.helper.getData();
   isTheme.value = theme ?? false;
   }
+
+  Future<void> dbData()
+  async {
+  historyList.value =await DbHelper.helper.readData();
+  }
+
+  // void deleteData(int cid)
+  // {
+  //   DbHelper.helper.deleteData(cid);
+  // }
 }

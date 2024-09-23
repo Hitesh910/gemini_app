@@ -10,6 +10,7 @@ void main() {
   runApp(
     Obx(
       () =>  GetMaterialApp(
+        debugShowCheckedModeBanner: false,
         routes: app_routes,
         theme: controller.isTheme.value == false ?light :dark,
       ),
