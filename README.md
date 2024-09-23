@@ -1,6 +1,6 @@
 <h1>Gemini App</h1>
 
-<h1>App with movkup</h1>
+<h1>App with mockup</h1>
 <p>
     <img src = "https://github.com/user-attachments/assets/86395b34-f26d-4d77-a839-19e82bdeae3e"height="800"width="400"/>
       <img src = "https://github.com/user-attachments/assets/8bd2fb29-8f0c-46a2-bd26-9426cf790f24"height="800"width="400"/>
