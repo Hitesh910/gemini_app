@@ -55,6 +55,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                               onPressed: () {
                                 DbHelper.helper.deleteData(
                                     controller.historyList[index].i!);
+                                controller.dbData();
                                 Get.back();
                               },
                               child: const Text("Yes"),
@@ -69,14 +70,20 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         );
                       },
                       child: Container(
-                        alignment: Alignment.centerRight,
+                        alignment: controller.historyList[index].status == 0
+                            ? Alignment.centerRight
+                            : Alignment.centerLeft,
                         child: Container(
                           // color: Colors.red,
                           padding: const EdgeInsets.all(5),
                           margin: const EdgeInsets.all(5),
-                          decoration: const BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.only(
+                          decoration: BoxDecoration(
+                            color: controller.historyList[index].status == 0
+                                ? Colors.blue
+                                : controller.isTheme.value == true
+                                    ? Colors.black
+                                    : Colors.white,
+                            borderRadius: const BorderRadius.only(
                               bottomLeft: Radius.circular(10),
                               topLeft: Radius.circular(10),
                               topRight: Radius.circular(10),
@@ -89,51 +96,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         ),
                       ),
                     ),
-                    InkWell(
-                      onLongPress: () {
-                        Get.defaultDialog(
-                          title: "Delete",
-                          content: const Text("Delete data"),
-                          actions: [
-                            ElevatedButton(
-                              onPressed: () {
-                                DbHelper.helper.deleteData(
-                                    controller.historyList[index].i!);
-                                Get.back();
-                              },
-                              child: const Text("Yes"),
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                Get.back();
-                              },
-                              child: const Text("No"),
-                            )
-                          ],
-                        );
-                      },
-                      child: Container(
-                        alignment: Alignment.centerLeft,
-                        child: Container(
-                          // color: Colors.green,
-                          padding: const EdgeInsets.all(10),
-                          margin: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: controller.isTheme.value == true
-                                ? Colors.black
-                                : Colors.white,
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              topRight: Radius.circular(10),
-                              bottomRight: Radius.circular(10),
-                            ),
-                          ),
-                          child: Text(
-                            "${controller.historyList[index].data}",
-                          ),
-                        ),
-                      ),
-                    )
                   ],
                 );
               },

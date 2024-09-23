@@ -26,16 +26,16 @@ class DbHelper {
       path,
       version: 1,
       onCreate: (db, version) {
-        String query1 = "CREATE TABLE history (cid INTEGER PRIMARY KEY AUTOINCREMENT, history TEXT,data TEXT)";
+        String query1 = "CREATE TABLE history (cid INTEGER PRIMARY KEY AUTOINCREMENT, history TEXT,status INTEGER)";
 print("=================================================== table query${query1}");
         db.execute(query1);
       },
     );
   }
 
-  Future<void> insertData(String search,String data) async {
+  Future<void> insertData(String search,int i) async {
     database = await checkDb();
-     database!.insert('history', {'history':search,'data':data});
+     database!.insert('history', {'history':search,'status':i});
   }
 
   Future<List<HistoryModel>> readData() async {
@@ -54,7 +54,8 @@ print("=================================================== table query${query1}"
   Future<void> deleteData(int cid)
   async {
     database = await checkDb();
+    print("================================= cid ${cid}");
     String query = "DELETE FROM history WHERE id = $cid";
-    database!.delete(query);
+    database!.delete("history",where: "cid=?",whereArgs:[cid]);
   }
 }

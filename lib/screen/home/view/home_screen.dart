@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gemini_app/screen/home/controller/home_controller.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:speech_to_text/speech_to_text.dart';
 
 import '../../../utils/helper/shared_helper.dart';
 import '../model/gemini_model.dart';
@@ -17,13 +18,22 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   HomeController controller = Get.put(HomeController());
   TextEditingController txtSearch = TextEditingController();
+  // SpeechToText speechToText = SpeechToText();
+  // bool isEnabled = false;
+  // String lastWords = "";
 
   @override
   void initState() {
     super.initState();
+    controller.initSpeech();
     // controller.getData(txtSearch.text);
     // print("+=======================================${data}");
   }
+
+  // Future<void> initSpeech()
+  // async {
+  //   isEnabled = await speechToText.initialize();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -182,8 +192,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                           isRepeatingAnimation: false,
                                           animatedTexts: [
                                             TyperAnimatedText(
-                                              "${controller.geminiList[index]}",
-                                              textStyle: TextStyle(
+                                              speed: const Duration(milliseconds: 12),
+                                              controller.geminiList[index],
+                                              textStyle: const TextStyle(
                                                 fontSize: 15,
                                                 // color: controller.isTheme.value ==
                                                 //         true
@@ -254,7 +265,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Row(
                         children: [
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              controller.speechToText.isNotListening ? controller.startSpeech():controller.stopSpeech();
+                              print("============================${controller.speechToText.isListening ? controller.lastWords : controller.isEnabled}");
+                            },
                             icon: const Icon(Icons.mic),
                           ),
                           SizedBox(
