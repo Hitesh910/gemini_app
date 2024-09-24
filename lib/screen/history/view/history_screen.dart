@@ -25,6 +25,15 @@ class _HistoryScreenState extends State<HistoryScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("History"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              DbHelper.helper.deleteAllData();
+              controller.dbData();
+            },
+            icon: Icon(Icons.delete),
+          )
+        ],
       ),
       body: Stack(
         children: [

@@ -58,4 +58,11 @@ print("=================================================== table query${query1}"
     String query = "DELETE FROM history WHERE id = $cid";
     database!.delete("history",where: "cid=?",whereArgs:[cid]);
   }
+
+  Future<void> deleteAllData()
+  async {
+    database =await checkDb();
+    String query = "DELETE FROM history";
+    database!.delete("history");
+  }
 }
