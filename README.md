@@ -2,7 +2,7 @@
 
 <h1>App with mockup</h1>
 <p>
-        <img src = "https://github.com/user-attachments/assets/ff9f60e8-bc70-422e-88a6-7d38c7057155"height="800"width="400"/>
+        <img src = "https://github.com/user-attachments/assets/ff9f60e8-bc70-422e-88a6-7d38c7057155"height="500"width="200"/>
        <img src = "https://github.com/user-attachments/assets/4d3ff3ab-b00b-4587-a4d9-00bbfe337baf"height="800"width="400"/>
        <img src = "https://github.com/user-attachments/assets/12dda0b3-f8a3-465e-aaba-ad8b5ae98b47"height="800"width="400"/>
        <img src = "https://github.com/user-attachments/assets/319ec180-2639-4521-9a3f-b2c32a78d50a"height="800"width="400"/>
